@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Página Principal - OnlyFlans{% endblock %}
+
+{% block content %}
+    <h1 class="display-4">Bienvenido a OnlyFlans</h1>
+    <div class="container">
+        <div class="row">
+            {% for flan in flanes %}
+                {% if not flan.is_private %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ flan.image_url }}" alt="{{ flan.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ flan.name }}</h5>
+                                <p class="card-text">{{ flan.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

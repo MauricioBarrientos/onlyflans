@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Contacto - OnlyFlans{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Contacto</h1>
+        <p>¡Bienvenido a nuestra página de contacto!</p>
+        <p>Por favor, completa el formulario a continuación para ponerte en contacto con nosotros.</p>
+
+        <div style="max-width: 400px; margin: 0 auto;">
+            <form method="post" style="padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" style="background-color: #007bff; color: white; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer;">Enviar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

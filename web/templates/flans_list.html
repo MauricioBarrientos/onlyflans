@@ -1,0 +1,22 @@
+<!-- templates/flans_list.html -->
+{% extends "base.html" %}
+
+{% block title %}Lista de Flanes{% endblock %}
+
+{% block content %}
+  <h2>Índice</h2>
+  <div class="row">
+    {% for flan in flans %}
+      <div class="col-md-4 mb-4">
+        <div class="card" style="width: 18rem;">
+          <img src="{{ flan.imagen_url }}" class="card-img-top" alt="Imagen de {{ flan.nombre }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ flan.nombre }}</h5>
+            <p class="card-text">{{ flan.descripcion }}</p>
+            <a href="{% url 'detalle_flan' flan.id %}" class="btn btn-primary">Ver receta</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
