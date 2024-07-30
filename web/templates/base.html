@@ -3,40 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}OnlyFlans{% endblock %}</title>
+    <title>{% block title %}Página Principal{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .card-container {
-            display: flex;
-            overflow-x: auto;
-            padding-bottom: 1rem;
-        }
-        .card {
-            flex: 0 0 auto;
-            width: 18rem;
-            margin-right: 1rem;
-        }
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
-        }
+        /* Tus estilos personalizados aquí */
     </style>
 </head>
 <body>
-    <header style="background: red;">
-        {% include 'header.html' %}
+    <header>
+        <div class="container py-3 text-center">
+            <img src="/static/OnlyFlans.png" alt="OnlyFlans Logo" class="img-fluid">
+        </div>
     </header>
-    <nav style="background: white;">
-        {% include 'navbar.html' %}
-        <ul>
-            <li><a href="{% url 'contacto' %}">Contacto</a></li>
-        </ul>
+    <nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-top border-bottom">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a> <!-- Cambiado a 'index' -->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'welcome' %}">Bienvenido</a> <!-- Esto está correcto -->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">Acerca</a> <!-- Cambiado a 'about' -->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contacto' %}">Contacto</a> <!-- Esto está correcto -->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </nav>
     <main class="container-fluid my-4">
-        {% block content %}{% endblock %}
+        {% block content %}
+        {% endblock %}
     </main>
-    <footer style="background: green;" class="text-center py-3">
-        {% include 'footer.html' %}
+    <footer class="text-center py-3">
+        <footer class="bg-success text-white text-center py-1">
+            <div class="container">
+                <p>Creado por Mauricio Barrientos Full Stack Python</p>
+            </div>
+        </footer>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

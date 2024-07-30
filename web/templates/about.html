@@ -1,14 +1,103 @@
 {% extends 'base.html' %}
 
-{% block title %}OnlyFlans - Acerca{% endblock %}
+{% block title %}OnlyFlans - Acerca de Nosotros{% endblock %}
 
 {% block content %}
-    <h1 class="display-4">Acerca</h1>
-    <p class="lead">Esta es la página acerca de nuestra PYME.</p>
-    <div class="card">
+<style>
+    .about-section {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+    }
+    .about-title {
+        color: #343a40;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        border-bottom: 2px solid #f8d7da;
+        padding-bottom: 1rem;
+    }
+    .about-lead {
+        font-size: 1.1rem;
+        color: #6c757d;
+        margin-bottom: 2rem;
+        line-height: 1.8;
+    }
+    .history-card {
+        background-color: #fff3cd;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+    .history-card-title {
+        color: #856404;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    .history-card-text {
+        color: #6c757d;
+        line-height: 1.6;
+    }
+    .values-section {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-top: 3rem;
+    }
+    .value-item {
+        text-align: center;
+        margin-bottom: 2rem;
+        flex-basis: 30%;
+    }
+    .value-icon {
+        font-size: 2.5rem;
+        color: #28a745;
+        margin-bottom: 1rem;
+    }
+    .value-title {
+        font-size: 1.2rem;
+        color: #343a40;
+        margin-bottom: 0.5rem;
+    }
+    .value-description {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+</style>
+
+<div class="about-section">
+    <h1 class="about-title">Acerca de OnlyFlans</h1>
+
+    <p class="about-lead">
+        En OnlyFlans, llevamos la tradición del flan casero a tu mesa. Cada flan es elaborado con ingredientes frescos y de la más alta calidad, siguiendo recetas familiares transmitidas de generación en generación. Nuestro objetivo es ofrecerte una experiencia gustativa única, donde cada bocado te transporte a recuerdos de infancia y momentos especiales.
+    </p>
+
+    <div class="card history-card">
         <div class="card-body">
-            <h5 class="card-title">Nuestra Historia</h5>
-            <p class="card-text">Descripción de la historia de la PYME...</p>
+            <h5 class="card-title history-card-title">Nuestra Historia</h5>
+            <p class="card-text history-card-text">
+                En OnlyFlans, la pasión por la repostería se transmite de generación en generación. Desde la pequeña cocina de María Luz, hemos crecido hasta convertirnos en una empresa familiar dedicada a elaborar flanes artesanales con recetas tradicionales. Nuestro compromiso con la calidad y el sabor auténtico nos ha permitido ganarnos el corazón (y el paladar) de nuestros clientes a lo largo de los años.
+            </p>
         </div>
     </div>
+
+    <div class="values-section">
+        <div class="value-item">
+            <div class="value-icon">🍮</div>
+            <h3 class="value-title">Calidad</h3>
+            <p class="value-description">Utilizamos solo los mejores ingredientes para nuestros flanes.</p>
+        </div>
+        <div class="value-item">
+            <div class="value-icon">👨‍👩‍👧‍👦</div>
+            <h3 class="value-title">Tradición</h3>
+            <p class="value-description">Mantenemos vivas las recetas familiares en cada flan.</p>
+        </div>
+        <div class="value-item">
+            <div class="value-icon">❤️</div>
+            <h3 class="value-title">Pasión</h3>
+            <p class="value-description">Ponemos amor y dedicación en cada uno de nuestros postres.</p>
+        </div>
+    </div>
+</div>
 {% endblock %}

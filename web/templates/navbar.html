@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-top border-bottom">
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar">
     <div class="container">
-        <a class="navbar-brand" href="#">OnlyFlans</a>
+        <a class="navbar-brand" href="/">OnlyFlans</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -15,7 +15,97 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'about' %}">Acerca</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<style>
+    .custom-navbar {
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .custom-navbar:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .navbar-brand {
+        font-weight: 700;
+        color: #007bff;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+        color: #0056b3;
+    }
+
+    .navbar-nav .nav-item {
+        position: relative;
+        margin: 0 5px;
+    }
+
+    .navbar-nav .nav-link {
+        color: #333;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+        color: #007bff;
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    .navbar-nav .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background-color: #007bff;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover::after {
+        width: 100%;
+        left: 0;
+    }
+
+    .navbar-nav .active .nav-link {
+        color: #007bff;
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    .navbar-toggler {
+        border: none;
+        padding: 0.25rem 0.75rem;
+        font-size: 1.25rem;
+        line-height: 1;
+        background-color: transparent;
+        border-radius: 0.25rem;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-toggler:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    @media (max-width: 991.98px) {
+        .navbar-nav .nav-link {
+            padding: 10px 15px;
+        }
+
+        .navbar-nav .nav-link::after {
+            display: none;
+        }
+    }
+</style>
