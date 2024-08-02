@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Página Principal{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="icon" href="{% static 'C:\Users\DELL\Desktop\TALENTO DIGITAL PYTHON 2024\DJANGO\onlyfans\web\static\flan.ico' %}" type="image/x-icon">
     <style>
-        /* Tus estilos personalizados aquí */
     </style>
 </head>
 <body>
@@ -24,16 +25,16 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a> <!-- Cambiado a 'index' -->
+                            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'welcome' %}">Bienvenido</a> <!-- Esto está correcto -->
+                            <a class="nav-link" href="{% url 'welcome' %}">Bienvenido</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'about' %}">Acerca</a> <!-- Cambiado a 'about' -->
+                            <a class="nav-link" href="{% url 'about' %}">Acerca</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'contacto' %}">Contacto</a> <!-- Esto está correcto -->
+                            <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
                         </li>
                     </ul>
                 </div>

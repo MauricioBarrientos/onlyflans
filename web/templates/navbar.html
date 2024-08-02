@@ -5,7 +5,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
                 </li>
@@ -30,14 +30,15 @@
         transition: all 0.3s ease;
     }
 
-    .custom-navbar:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    .custom-navbar.scrolled {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .navbar-brand {
         font-weight: 700;
         color: #007bff;
         transition: color 0.3s ease;
+        font-size: 1.5rem;
     }
 
     .navbar-brand:hover {
@@ -45,16 +46,16 @@
     }
 
     .navbar-nav .nav-item {
-        position: relative;
-        margin: 0 5px;
+        margin: 0 15px;
     }
 
     .navbar-nav .nav-link {
         color: #333;
         font-weight: 500;
-        padding: 8px 15px;
-        border-radius: 20px;
+        padding: 10px 20px;
+        border-radius: 25px;
         transition: all 0.3s ease;
+        position: relative;
     }
 
     .navbar-nav .nav-link:hover,
@@ -66,17 +67,17 @@
     .navbar-nav .nav-link::after {
         content: '';
         position: absolute;
-        width: 0;
+        width: 100%;
         height: 2px;
-        bottom: 0;
-        left: 50%;
+        bottom: -5px;
+        left: 0;
         background-color: #007bff;
-        transition: all 0.3s ease;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
     }
 
     .navbar-nav .nav-link:hover::after {
-        width: 100%;
-        left: 0;
+        transform: scaleX(1);
     }
 
     .navbar-nav .active .nav-link {
@@ -88,7 +89,6 @@
         border: none;
         padding: 0.25rem 0.75rem;
         font-size: 1.25rem;
-        line-height: 1;
         background-color: transparent;
         border-radius: 0.25rem;
         transition: all 0.3s ease;

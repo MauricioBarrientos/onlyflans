@@ -9,5 +9,5 @@ urlpatterns = [
     path('bienvenido/', views.welcome, name='welcome'),
     path('flans/', views.flans_list, name='flans_list'),
     path('contacto/', views.contacto, name='contacto'),
-    path('exito/', views.exito_contacto, name='exito_contacto'),  # Corregido: Se debe usar views.exito_contacto
+    path('exito/', views.exito_contacto, name='exito_contacto'),
 ]
