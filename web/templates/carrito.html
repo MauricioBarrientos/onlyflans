@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Ver Carrito - OnlyFlans{% endblock %}
+
+{% load custom_filters %}  <!-- Carga el filtro personalizado -->
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Ver Carrito</h1>
+    {% if cart_items %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                    <th>Acciones</th> <!-- Añadir una columna para las acciones -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.price }}</td>
+                        <td>{{ item.quantity|multiply:item.product.price }}</td> <!-- Usar el filtro multiply -->
+                        <td>
+                            <form action="{% url 'remove_from_cart' item.id %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-end">
+            <h4>Total: {{ cart_total }}</h4>
+        </div>
+    {% else %}
+        <p>No hay productos en el carrito.</p>
+    {% endif %}
+</div>
+{% endblock %}

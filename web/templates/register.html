@@ -1,10 +1,8 @@
-{% extends 'base.html' %}
-
-{% block title %}Contacto - OnlyFlans{% endblock %}
-
+{% extends "base.html" %}
+{% block title %}Regístrate - OnlyFlans{% endblock %}
 {% block content %}
 <style>
-    .contact-container {
+    .register-container {
         max-width: 600px;
         margin: 2rem auto;
         padding: 2rem;
@@ -12,17 +10,12 @@
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    .contact-title {
+    .register-title {
         color: #343a40;
         margin-bottom: 1.5rem;
         text-align: center;
     }
-    .contact-description {
-        color: #6c757d;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    .contact-form {
+    .register-form {
         background-color: #ffffff;
         padding: 2rem;
         border-radius: 8px;
@@ -37,17 +30,12 @@
         color: #495057;
         font-weight: 600;
     }
-    .form-group input,
-    .form-group textarea {
+    .form-group input {
         width: 100%;
         padding: 0.75rem;
         border: 1px solid #ced4da;
         border-radius: 4px;
         font-size: 1rem;
-    }
-    .form-group textarea {
-        resize: vertical;
-        min-height: 120px;
     }
     .submit-button {
         background-color: #007bff;
@@ -67,11 +55,9 @@
     }
 </style>
 
-<div class="contact-container">
-    <h1 class="contact-title">Contacto</h1>
-    <p class="contact-description">Nos encantaría escuchar de ti. Por favor, completa el formulario a continuación y nos pondremos en contacto contigo lo antes posible.</p>
-
-    <form method="post" class="contact-form">
+<div class="register-container">
+    <h1 class="register-title">Regístrate</h1>
+    <form method="post" class="register-form">
         {% csrf_token %}
         {% for field in form %}
             <div class="form-group">
@@ -82,7 +68,7 @@
                 {% endif %}
             </div>
         {% endfor %}
-        <button type="submit" class="submit-button">Enviar mensaje</button>
+        <button type="submit" class="submit-button">Regístrate</button>
     </form>
 </div>
 {% endblock %}
