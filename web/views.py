@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Flan, CartItem
+from .models import Flan, CartItem, Product
 from .forms import ContactFormForm, UserRegisterForm
 
 def index(request):
@@ -42,16 +42,6 @@ def ver_carrito(request):
     }
     return render(request, 'carrito.html', context)
 
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-    else:
-        form = UserRegisterForm()
-    return render(request, 'register.html', {'form': form})
-
 @login_required
 def add_to_cart(request, product_id):
     product = Product.objects.get(id=product_id)
@@ -62,8 +52,17 @@ def add_to_cart(request, product_id):
     return redirect('carrito')
 
 @login_required
-def remove_from_cart(request, product_id):
-    product = Product.objects.get(id=product_id)
-    cart_item = CartItem.objects.filter(user=request.user, product=product)
+def remove_from_cart(request, item_id):
+    cart_item = get_object_or_404(CartItem, id=item_id, user=request.user)
     cart_item.delete()
     return redirect('carrito')
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'register.html', {'form': form})
