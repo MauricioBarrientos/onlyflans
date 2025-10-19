@@ -6,17 +6,34 @@
 {% block content %}
   <h2>Índice</h2>
   <div class="row">
-    {% for flan in flans %}
+    {% for flan in page_obj %}
       <div class="col-md-4 mb-4">
         <div class="card" style="width: 18rem;">
-          <img src="{{ flan.imagen_url }}" class="card-img-top" alt="Imagen de {{ flan.nombre }}">
+          <img src="{{ flan.image_url }}" class="card-img-top" alt="Imagen de {{ flan.name }}">
           <div class="card-body">
-            <h5 class="card-title">{{ flan.nombre }}</h5>
-            <p class="card-text">{{ flan.descripcion }}</p>
+            <h5 class="card-title">{{ flan.name }}</h5>
+            <p class="card-text">{{ flan.description }}</p>
             <a href="{% url 'detalle_flan' flan.id %}" class="btn btn-primary">Ver receta</a>
           </div>
         </div>
       </div>
     {% endfor %}
+  </div>
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; primera</a>
+            <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">siguiente</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">última &raquo;</a>
+        {% endif %}
+    </span>
   </div>
 {% endblock %}

@@ -15,6 +15,8 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('carrito/', views.ver_carrito, name='carrito'),
     path('logout/', auth_views.LogoutView.as_view(template_name='registration/logged_out.html'), name='logout'),
-    path('add_to_cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+    path('add_to_cart/<int:flan_id>/', views.add_to_cart, name='add_to_cart'),
     path('remove_from_cart/<int:item_id>/', views.remove_from_cart, name='remove_from_cart'),
+    path('flan/<int:flan_id>/', views.detalle_flan, name='detalle_flan'),
+    path('reviews/', views.reviews, name='reviews'),
 ]

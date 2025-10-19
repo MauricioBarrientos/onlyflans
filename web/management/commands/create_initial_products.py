@@ -1,17 +1,17 @@
 from django.core.management.base import BaseCommand
-from web.models import Product
+from web.models import Flan
 
 class Command(BaseCommand):
-    help = 'Create initial products for testing'
+    help = 'Create initial flans for testing'
 
     def handle(self, *args, **kwargs):
-        products = [
-            {'name': 'Flan Clásico', 'price': 1000.00},
-            {'name': 'Flan de Coco', 'price': 3000.00},
-            {'name': 'Flan de Queso', 'price': 2800.00},
+        flans = [
+            {'name': 'Flan Clásico', 'description': 'Delicioso flan tradicional', 'price': 1000.00, 'slug': 'flan-clasico'},
+            {'name': 'Flan de Coco', 'description': 'Flan con sabor a coco', 'price': 3000.00, 'slug': 'flan-coco'},
+            {'name': 'Flan de Queso', 'description': 'Flan cremoso de queso', 'price': 2800.00, 'slug': 'flan-queso'},
         ]
 
-        for product in products:
-            Product.objects.create(**product)
+        for flan_data in flans:
+            Flan.objects.get_or_create(**flan_data)
 
-        self.stdout.write(self.style.SUCCESS('Successfully created initial products'))
+        self.stdout.write(self.style.SUCCESS('Successfully created initial flans'))

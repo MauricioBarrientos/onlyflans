@@ -14,22 +14,15 @@ class Flan(models.Model):
     def __str__(self):
         return self.name
 
-class Product(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(default='Descripción no disponible')
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    image_url = models.URLField(default='https://upload.wikimedia.org/wikipedia/commons/6/64/Cr%C3%A8me_caramel_2.jpg')
-
-    def __str__(self):
-        return self.name
+# Remove Product model entirely
 
 class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    flan = models.ForeignKey(Flan, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.name}"
+        return f"{self.quantity} x {self.flan.name}"
 
 class ContactForm(models.Model):
     email = models.EmailField()

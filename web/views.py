@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Flan, CartItem, Product
-from .forms import ContactFormForm, UserRegisterForm
+from django.core.paginator import Paginator
+from .models import Flan, CartItem, Review
+from .forms import ContactFormForm, UserRegisterForm, ReviewForm
 
 def index(request):
     flanes_publicos = Flan.objects.filter(is_private=False)
@@ -16,8 +17,11 @@ def welcome(request):
     return render(request, 'welcome.html', {'flanes': flanes_privados})
 
 def flans_list(request):
-    flans = Flan.objects.all()
-    return render(request, 'flans_list.html', {'flans': flans})
+    flans = Flan.objects.all().order_by('name')
+    paginator = Paginator(flans, 10)  # Show 10 flans per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'flans_list.html', {'page_obj': page_obj})
 
 def contacto(request):
     if request.method == 'POST':
@@ -34,8 +38,8 @@ def exito_contacto(request):
 
 @login_required
 def ver_carrito(request):
-    cart_items = CartItem.objects.filter(user=request.user)
-    cart_total = sum(item.product.price * item.quantity for item in cart_items)
+    cart_items = CartItem.objects.filter(user=request.user).select_related('flan')
+    cart_total = sum(item.flan.price * item.quantity for item in cart_items)  # Updated to use flan.price
     context = {
         'cart_items': cart_items,
         'cart_total': cart_total
@@ -43,9 +47,9 @@ def ver_carrito(request):
     return render(request, 'carrito.html', context)
 
 @login_required
-def add_to_cart(request, product_id):
-    product = Product.objects.get(id=product_id)
-    cart_item, created = CartItem.objects.get_or_create(user=request.user, product=product)
+def add_to_cart(request, flan_id):
+    flan = get_object_or_404(Flan, id=flan_id)
+    cart_item, created = CartItem.objects.get_or_create(user=request.user, flan=flan)
     if not created:
         cart_item.quantity += 1
         cart_item.save()
@@ -66,3 +70,25 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'register.html', {'form': form})
+
+
+def detalle_flan(request, flan_id):
+    flan = get_object_or_404(Flan, id=flan_id)
+    reviews = Review.objects.filter(flan=flan).select_related('user')
+    if request.method == 'POST' and request.user.is_authenticated:
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.flan = flan
+            review.user = request.user
+            review.save()
+            return redirect('detalle_flan', flan_id=flan.id)
+    else:
+        form = ReviewForm()
+    return render(request, 'flan_detail.html', {'flan': flan, 'reviews': reviews, 'form': form})
+
+
+@login_required
+def reviews(request):
+    user_reviews = Review.objects.filter(user=request.user).select_related('flan')
+    return render(request, 'reviews.html', {'reviews': user_reviews})

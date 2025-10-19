@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
-from .models import ContactForm
+from .models import ContactForm, Review
 
 class ContactFormForm(forms.ModelForm):
     class Meta:
@@ -37,3 +37,24 @@ class UserRegisterForm(forms.ModelForm):
             raise forms.ValidationError(_("Las contraseñas no coinciden."))
 
         return cleaned_data
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data['password'])
+        if commit:
+            user.save()
+        return user
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']
+        widgets = {
+            'rating': forms.Select(choices=[(i, f'{i} estrella{"s" if i > 1 else ""}') for i in range(1, 6)]),
+            'comment': forms.Textarea(attrs={'rows': 4}),
+        }
+        labels = {
+            'rating': _('Calificación'),
+            'comment': _('Comentario'),
+        }
