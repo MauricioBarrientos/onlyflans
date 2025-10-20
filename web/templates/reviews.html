@@ -3,6 +3,35 @@
 {% block title %}Reseñas - OnlyFlans{% endblock %}
 
 {% block content %}
+<style>
+    .list-group-item {
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border-light);
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Darker shadow */
+        transition: all 0.3s ease;
+    }
+    .list-group-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .list-group-item strong {
+        font-size: 1.2rem;
+        color: var(--color-primary);
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    .list-group-item p {
+        color: var(--color-text-primary);
+        margin-bottom: 0.5rem;
+    }
+    .list-group-item small {
+        color: var(--color-text-secondary);
+        font-size: 0.9rem;
+    }
+</style>
 <div class="container mt-4">
     <h1 class="mb-4">Mis Reseñas</h1>
     <ul class="list-group">

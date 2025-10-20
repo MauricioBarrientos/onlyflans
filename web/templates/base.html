@@ -56,6 +56,27 @@
         .navbar-custom { background-color: rgba(255, 248, 220, 0.95); backdrop-filter: blur(10px); }
         .product-card { opacity: 0; animation: fadeInUp 0.6s ease forwards; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Custom main container styles */
+        .custom-main-container {
+            max-width: 960px; /* A common desktop width */
+            margin: 2rem auto; /* Center the container and add vertical margin */
+            padding: 0 15px; /* Add some horizontal padding */
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 992px) {
+            .custom-main-container {
+                max-width: 720px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .custom-main-container {
+                max-width: 100%;
+                padding: 0 10px;
+            }
+        }
     </style>
 
     <!-- Skip link for accessibility -->
@@ -99,20 +120,18 @@
                             <span class="cart-count" aria-label="Número de productos en el carrito">0</span>
                         </a>
                         {% if user.is_authenticated %}
-                            <div class="dropdown user-menu">
-                                <button class="btn btn-link nav-link dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menú de usuario">
-                                    <span class="sr-only">Menú de usuario para </span>{{ user.username }}
+                            <div style="position: relative; display: inline-block;">
+                                <button onclick="toggleDropdown()" style="background: none; border: none; color: var(--color-primary); cursor: pointer;">
+                                    {{ user.username }}
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                                    <li><a class="dropdown-item" href="{% url 'reviews' %}">Mis Reseñas</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li>
-                                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
-                                            {% csrf_token %}
-                                            <button type="submit" class="dropdown-item" type="submit">Cerrar sesión</button>
-                                        </form>
-                                    </li>
-                                </ul>
+                                <div id="userMenuDropdown" style="display: none; position: absolute; background-color: white; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 1;">
+                                    <a href="{% url 'reviews' %}" style="display: block; padding: 10px 20px; color: black; text-decoration: none;">Mis Reseñas</a>
+                                    <hr style="margin: 0;">
+                                    <form action="{% url 'logout' %}" method="post" style="margin: 0;">
+                                        {% csrf_token %}
+                                        <button type="submit" style="display: block; padding: 10px 20px; color: black; text-decoration: none; background: none; border: none; width: 100%; text-align: left; cursor: pointer;">Cerrar sesión</button>
+                                    </form>
+                                </div>
                             </div>
                         {% else %}
                             <a class="nav-link me-2" href="{% url 'login' %}">Iniciar sesión</a>
@@ -123,7 +142,7 @@
             </div>
         </nav>
     </nav>
-    <main id="main-content" class="container-fluid my-4" role="main">
+    <main id="main-content" class="custom-main-container" role="main">
         {% block content %}
         {% endblock %}
     </main>
@@ -164,6 +183,16 @@
         },
         "servesCuisine": "Postres Chilenos",
         "priceRange": "$$"
+    }
+    </script>
+    <script>
+    function toggleDropdown() {
+        var dropdown = document.getElementById("userMenuDropdown");
+        if (dropdown.style.display === "none") {
+            dropdown.style.display = "block";
+        } else {
+            dropdown.style.display = "none";
+        }
     }
     </script>
 </body>

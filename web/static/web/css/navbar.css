@@ -63,15 +63,16 @@
 }
 
 .user-menu .dropdown-menu {
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   padding: 0.5rem 0;
 }
 
-.user-menu .dropdown-item {
+.user-menu .dropdown-menu .dropdown-item {
   padding: 0.5rem 1.5rem;
-  color: var(--color-text-primary);
+  color: var(--color-text-primary) !important; /* Use !important to be sure */
   transition: background-color 0.2s ease;
 }
 

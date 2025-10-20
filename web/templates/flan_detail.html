@@ -39,25 +39,34 @@
         margin-top: 3rem;
     }
     .review {
-        background-color: #ffffff;
+        background-color: var(--color-surface);
         padding: 1rem;
         border-radius: 8px;
         margin-bottom: 1rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
     .review-rating {
-        color: #ffc107;
+        color: var(--color-primary);
     }
     .review-date {
-        color: #6c757d;
+        color: var(--color-text-secondary);
         font-size: 0.9rem;
     }
     .add-review-form {
-        background-color: #ffffff;
+        background-color: var(--color-surface);
         padding: 2rem;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         margin-top: 2rem;
+    }
+    .add-review-form .form-group input,
+    .add-review-form .form-group textarea {
+        background-color: white !important;
+        color: black !important;
+        border: 1px solid var(--color-border);
+        padding: 0.5rem;
+        border-radius: 4px;
+        width: 100%;
     }
 </style>
 

@@ -52,12 +52,22 @@
   outline: none;
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.1);
-  background-color: var(--color-background);
+  background-color: var(--color-surface); /* Changed from --color-background */
 }
 
 .form-control::placeholder {
   color: var(--color-text-muted);
   opacity: 0.7;
+}
+
+/* Handle browser autofill styles */
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:hover,
+.form-control:-webkit-autofill:focus,
+.form-control:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--color-text-primary);
+    -webkit-box-shadow: 0 0 0 30px var(--color-surface) inset !important;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 /* Textarea specific */

@@ -5,8 +5,8 @@
 {% block content %}
 <style>
     .hero-section {
-        background-color: #343a40;
-        color: #ffffff;
+        background-color: var(--color-primary);
+        color: white;
         padding: 4rem 0;
         text-align: center;
         margin-bottom: 3rem;
@@ -20,8 +20,8 @@
         margin-bottom: 2rem;
     }
     .hero-button {
-        background-color: #007bff;
-        color: #ffffff;
+        background-color: var(--color-accent);
+        color: var(--color-text-primary) !important; /* Added !important */
         padding: 0.5rem 1rem;
         border: none;
         border-radius: 4px;
@@ -29,14 +29,67 @@
         transition: background-color 0.2s ease-in-out;
     }
     .hero-button:hover {
-        background-color: #0056b3;
+        background-color: var(--color-surface);
+    }
+
+    .flan-card {
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .flan-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        border-color: var(--color-primary);
+    }
+
+    .flan-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .flan-card:hover .flan-image {
+        transform: scale(1.05);
+    }
+
+    .flan-title {
+        font-family: var(--font-heading);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+    }
+
+    .flan-description {
+        color: var(--color-text-secondary);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+    }
+
+    .flan-price {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--color-primary);
+        margin-bottom: 1rem;
     }
 </style>
 
 <div class="hero-section">
     <h1 class="hero-title">Bienvenido {{ user.username }}</h1>
     <p class="hero-subtitle">Tenemos una lista de productos exclusivos para ti. ¿Quieres conocer más?</p>
-    <a href="{% url 'contacto' %}" class="hero-button">Contáctanos</a>
+    <a href="{% url 'contacto' %}" class="hero-button" style="background-color: #000000; color: #FFFFFF;">Contáctanos</a>
 </div>
 
 <div class="container">
