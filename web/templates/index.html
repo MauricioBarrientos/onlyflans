@@ -29,10 +29,15 @@
                         <h5 class="product-card__title">{{ flan.name }}</h5>
                         <p class="product-card__description">{{ flan.description|truncatechars:100 }}</p>
                         <p class="product-card__price">${{ flan.price }}</p>
-                        <form action="{% url 'add_to_cart' flan.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="product-card__button">Añadir al carrito</button>
-                        </form>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="product-card__button product-card__button--secondary" data-quick-view="{{ flan.id }}">
+                                Vista Rápida
+                            </button>
+                            <form action="{% url 'add_to_cart' flan.id %}" method="post" class="flex-grow-1">
+                                {% csrf_token %}
+                                <button type="submit" class="product-card__button">Añadir al carrito</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
