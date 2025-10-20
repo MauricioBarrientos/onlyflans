@@ -17,7 +17,7 @@ def welcome(request):
     return render(request, 'welcome.html', {'flanes': flanes_privados})
 
 def flans_list(request):
-    flans = Flan.objects.all().order_by('name')
+    flans = Flan.objects.filter(is_private=False).order_by('name')
     paginator = Paginator(flans, 10)  # Show 10 flans per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -74,6 +74,12 @@ def register(request):
 
 def detalle_flan(request, flan_id):
     flan = get_object_or_404(Flan, id=flan_id)
+
+    # Verificar permisos: flanes privados solo para usuarios autenticados
+    if flan.is_private and not request.user.is_authenticated:
+        from django.http import Http404
+        raise Http404("Flan no encontrado")
+
     reviews = Review.objects.filter(flan=flan).select_related('user')
     if request.method == 'POST' and request.user.is_authenticated:
         form = ReviewForm(request.POST)
