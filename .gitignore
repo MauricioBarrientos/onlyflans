@@ -39,6 +39,7 @@ venv/
 *.mo
 *.sqlite3
 db.sqlite3
+*.backup
 local_settings.py
 
 # IDE-specific files
