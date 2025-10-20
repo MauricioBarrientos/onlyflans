@@ -12,6 +12,9 @@ class Command(BaseCommand):
         ]
 
         for flan_data in flans:
-            Flan.objects.get_or_create(**flan_data)
+            Flan.objects.update_or_create(
+                slug=flan_data['slug'],
+                defaults=dict(flan_data, is_private=False)
+            )
 
-        self.stdout.write(self.style.SUCCESS('Successfully created initial flans'))
+        self.stdout.write(self.style.SUCCESS('Successfully created or updated initial flans'))
