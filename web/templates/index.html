@@ -23,19 +23,23 @@
         <div class="row">
         {% for flan in flanes %}
             <div class="col-md-4 mb-4">
-                <div class="product-card">
-                    <img class="product-card__image" src="{{ flan.image_url }}" alt="{{ flan.name }}">
+                <div class="product-card" itemscope itemtype="https://schema.org/Product">
+                    <img class="product-card__image" src="{{ flan.image_url }}" alt="Imagen de {{ flan.name }}" loading="lazy" decoding="async" itemprop="image">
                     <div class="product-card__body">
-                        <h5 class="product-card__title">{{ flan.name }}</h5>
-                        <p class="product-card__description">{{ flan.description|truncatechars:100 }}</p>
-                        <p class="product-card__price">${{ flan.price }}</p>
+                        <h5 class="product-card__title" itemprop="name">{{ flan.name }}</h5>
+                        <p class="product-card__description" itemprop="description">{{ flan.description|truncatechars:100 }}</p>
+                        <p class="product-card__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                            <span itemprop="priceCurrency" content="CLP">$</span><span itemprop="price" content="{{ flan.price }}">{{ flan.price }}</span>
+                        </p>
                         <div class="d-flex gap-2">
-                            <button type="button" class="product-card__button product-card__button--secondary" data-quick-view="{{ flan.id }}">
+                            <button type="button" class="product-card__button product-card__button--secondary" data-quick-view="{{ flan.id }}" aria-label="Ver detalles de {{ flan.name }}">
                                 Vista Rápida
                             </button>
                             <form action="{% url 'add_to_cart' flan.id %}" method="post" class="flex-grow-1">
                                 {% csrf_token %}
-                                <button type="submit" class="product-card__button">Añadir al carrito</button>
+                                <button type="submit" class="product-card__button" aria-label="Añadir {{ flan.name }} al carrito">
+                                    Añadir al carrito
+                                </button>
                             </form>
                         </div>
                     </div>

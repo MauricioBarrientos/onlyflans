@@ -2,11 +2,43 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Página Principal{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{% block title %}OnlyFlans - Flanes Artesanales Premium{% endblock %}</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{% block meta_description %}Descubre los mejores flanes artesanales de Chile. Productos frescos, tradicionales y deliciosos entregados a tu puerta.{% endblock %}">
+    <meta name="keywords" content="flanes, postres chilenos, flanes artesanales, repostería chilena, dulces tradicionales">
+    <meta name="author" content="OnlyFlans">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block og_title %}OnlyFlans - Flanes Artesanales Premium{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Descubre los mejores flanes artesanales de Chile. Productos frescos, tradicionales y deliciosos.{% endblock %}">
+    <meta property="og:image" content="{% static 'OnlyFlans.png' %}">
+    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}OnlyFlans - Flanes Artesanales Premium{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Descubre los mejores flanes artesanales de Chile.{% endblock %}">
+    <meta name="twitter:image" content="{% static 'OnlyFlans.png' %}">
+
+    <!-- Performance and Security -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Favicon -->
     <link rel="icon" href="{% static 'flan.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'OnlyFlans.png' %}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    {% load static %}
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'web/css/base.css' %}">
     <link rel="stylesheet" href="{% static 'web/css/theme.css' %}">
     <link rel="stylesheet" href="{% static 'web/css/components.css' %}">
@@ -16,6 +48,19 @@
     <link rel="stylesheet" href="{% static 'web/css/forms.css' %}">
     <link rel="stylesheet" href="{% static 'web/css/modals.css' %}">
     <link rel="stylesheet" href="{% static 'web/css/gallery.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/accessibility.css' %}">
+
+    <!-- Critical CSS (inline for performance) -->
+    <style>
+        /* Critical above-the-fold styles */
+        .hero-section { min-height: 60vh; background: linear-gradient(135deg, #D2691E 0%, #8B4513 100%); }
+        .navbar-custom { background-color: rgba(255, 248, 220, 0.95); backdrop-filter: blur(10px); }
+        .product-card { opacity: 0; animation: fadeInUp 0.6s ease forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 </head>
 <body>
     <header>
@@ -24,40 +69,40 @@
         </div>
     </header>
     <nav>
-        <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-custom sticky-top" role="navigation" aria-label="Navegación principal">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'index' %}">
-                    <img src="{% static 'OnlyFlans.png' %}" alt="OnlyFlans Logo" class="img-fluid" style="height: 40px;">
+                <a class="navbar-brand" href="{% url 'index' %}" aria-label="OnlyFlans - Inicio">
+                    <img src="{% static 'OnlyFlans.png' %}" alt="OnlyFlans Logo" class="img-fluid" style="height: 40px;" loading="eager">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0" role="menubar">
+                        <li class="nav-item" role="none">
+                            <a class="nav-link active" aria-current="page" href="{% url 'index' %}" role="menuitem">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'flans_list' %}">Productos</a>
+                        <li class="nav-item" role="none">
+                            <a class="nav-link" href="{% url 'flans_list' %}" role="menuitem">Productos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'about' %}">Nosotros</a>
+                        <li class="nav-item" role="none">
+                            <a class="nav-link" href="{% url 'about' %}" role="menuitem">Nosotros</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+                        <li class="nav-item" role="none">
+                            <a class="nav-link" href="{% url 'contacto' %}" role="menuitem">Contacto</a>
                         </li>
                     </ul>
                     <div class="navbar-actions d-flex align-items-center">
-                        <a href="{% url 'carrito' %}" class="cart-indicator me-3">
-                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <a href="{% url 'carrito' %}" class="cart-indicator me-3" aria-label="Ver carrito de compras">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
                                 <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zM4 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm9 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
                             </svg>
-                            <span class="cart-count">0</span>
+                            <span class="cart-count" aria-label="Número de productos en el carrito">0</span>
                         </a>
                         {% if user.is_authenticated %}
                             <div class="dropdown user-menu">
-                                <button class="btn btn-link nav-link dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ user.username }}
+                                <button class="btn btn-link nav-link dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menú de usuario">
+                                    <span class="sr-only">Menú de usuario para </span>{{ user.username }}
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="userDropdown">
                                     <li><a class="dropdown-item" href="{% url 'reviews' %}">Mis Reseñas</a></li>
@@ -65,7 +110,7 @@
                                     <li>
                                         <form action="{% url 'logout' %}" method="post" style="display: inline;">
                                             {% csrf_token %}
-                                            <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                                            <button type="submit" class="dropdown-item" type="submit">Cerrar sesión</button>
                                         </form>
                                     </li>
                                 </ul>
@@ -79,16 +124,48 @@
             </div>
         </nav>
     </nav>
-    <main class="container-fluid my-4">
+    <main id="main-content" class="container-fluid my-4" role="main">
         {% block content %}
         {% endblock %}
     </main>
-    <footer>
+    <footer role="contentinfo">
         <div class="container">
             <p class="text-center mb-0">Creado por Mauricio Barrientos Full Stack Python</p>
+            <p class="text-center mt-2 small text-muted">
+                <a href="#" class="text-muted">Política de Privacidad</a> |
+                <a href="#" class="text-muted">Términos de Servicio</a> |
+                <a href="#" class="text-muted">Contacto</a>
+            </p>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'web/js/main.js' %}"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="{% static 'web/js/main.js' %}" defer></script>
+    <script src="{% static 'web/js/performance.js' %}" defer></script>
+
+    <!-- Schema.org structured data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Bakery",
+        "name": "OnlyFlans",
+        "description": "Flanes artesanales premium de Chile",
+        "url": "{{ request.build_absolute_uri }}",
+        "logo": "{{ request.build_absolute_uri }}{% static 'OnlyFlans.png' %}",
+        "sameAs": [
+            "https://www.facebook.com/onlyflans",
+            "https://www.instagram.com/onlyflans"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "CL"
+        },
+        "servesCuisine": "Postres Chilenos",
+        "priceRange": "$$"
+    }
+    </script>
 </body>
 </html>
