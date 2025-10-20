@@ -8,12 +8,12 @@
   <div class="row">
     {% for flan in page_obj %}
       <div class="col-md-4 mb-4">
-        <div class="card" style="width: 18rem;">
-          <img src="{{ flan.image_url }}" class="card-img-top" alt="Imagen de {{ flan.name }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ flan.name }}</h5>
-            <p class="card-text">{{ flan.description }}</p>
-            <a href="{% url 'detalle_flan' flan.id %}" class="btn btn-primary">Ver receta</a>
+        <div class="product-card">
+          <img class="product-card__image" src="{{ flan.image_url }}" alt="Imagen de {{ flan.name }}">
+          <div class="product-card__body">
+            <h5 class="product-card__title">{{ flan.name }}</h5>
+            <p class="product-card__description">{{ flan.description }}</p>
+            <a href="{% url 'detalle_flan' flan.id %}" class="product-card__button product-card__button--secondary">Ver receta</a>
           </div>
         </div>
       </div>

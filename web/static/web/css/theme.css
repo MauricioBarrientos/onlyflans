@@ -1,0 +1,24 @@
+/* web/static/web/css/theme.css */
+:root {
+  /* Primary Colors */
+  --color-primary: #D2691E;        /* Warm caramel orange */
+  --color-secondary: #8B4513;      /* Rich chocolate brown */
+  --color-accent: #F5F5DC;         /* Creamy vanilla */
+
+  /* Semantic Colors */
+  --color-success: #20B2AA;        /* Fresh mint green */
+  --color-warning: #FFA500;        /* Orange */
+  --color-danger: #DC143C;         /* Crimson */
+  --color-info: #87CEEB;           /* Sky blue */
+
+  /* Neutral Colors */
+  --color-background: #FFF8DC;     /* Soft cream */
+  --color-surface: #FFFFFF;        /* Pure white */
+  --color-text-primary: #2F1B14;   /* Deep chocolate */
+  --color-text-secondary: #6B4423; /* Medium brown */
+  --color-text-muted: #A0522D;     /* Light brown */
+
+  /* Border Colors */
+  --color-border: #DEB887;         /* Burlywood */
+  --color-border-light: #F5DEB3;   /* Wheat */
+}

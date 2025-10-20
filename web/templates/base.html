@@ -7,8 +7,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     {% load static %}
     <link rel="icon" href="{% static 'flan.ico' %}" type="image/x-icon">
-    <style>
-    </style>
+    <link rel="stylesheet" href="{% static 'web/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/layout.css' %}">
 </head>
 <body>
     <header>
@@ -60,12 +62,10 @@
         {% block content %}
         {% endblock %}
     </main>
-    <footer class="text-center py-3">
-        <footer class="bg-success text-white text-center py-1">
-            <div class="container">
-                <p>Creado por Mauricio Barrientos Full Stack Python</p>
-            </div>
-        </footer>
+    <footer>
+        <div class="container">
+            <p class="text-center mb-0">Creado por Mauricio Barrientos Full Stack Python</p>
+        </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
