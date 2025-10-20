@@ -3,86 +3,34 @@
 {% block title %}Contacto - OnlyFlans{% endblock %}
 
 {% block content %}
-<style>
-    .contact-container {
-        max-width: 600px;
-        margin: 2rem auto;
-        padding: 2rem;
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    .contact-title {
-        color: #343a40;
-        margin-bottom: 1.5rem;
-        text-align: center;
-    }
-    .contact-description {
-        color: #6c757d;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    .contact-form {
-        background-color: #ffffff;
-        padding: 2rem;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-    .form-group label {
-        display: block;
-        margin-bottom: 0.5rem;
-        color: #495057;
-        font-weight: 600;
-    }
-    .form-group input,
-    .form-group textarea {
-        width: 100%;
-        padding: 0.75rem;
-        border: 1px solid #ced4da;
-        border-radius: 4px;
-        font-size: 1rem;
-    }
-    .form-group textarea {
-        resize: vertical;
-        min-height: 120px;
-    }
-    .submit-button {
-        background-color: #007bff;
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 1rem;
-        font-weight: 600;
-        transition: background-color 0.2s ease-in-out;
-        display: block;
-        width: 100%;
-    }
-    .submit-button:hover {
-        background-color: #0056b3;
-    }
-</style>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="form-container">
+                <h1 class="form-title">Contacto</h1>
+                <p class="text-center mb-4 text-muted">Nos encantaría escuchar de ti. Por favor, completa el formulario a continuación y nos pondremos en contacto contigo lo antes posible.</p>
 
-<div class="contact-container">
-    <h1 class="contact-title">Contacto</h1>
-    <p class="contact-description">Nos encantaría escuchar de ti. Por favor, completa el formulario a continuación y nos pondremos en contacto contigo lo antes posible.</p>
-
-    <form method="post" class="contact-form">
-        {% csrf_token %}
-        {% for field in form %}
-            <div class="form-group">
-                {{ field.label_tag }}
-                {{ field }}
-                {% if field.errors %}
-                    <small style="color: red;">{{ field.errors|striptags }}</small>
-                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group{% if field.errors %} error{% endif %}">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            {% if field.field.widget.input_type == 'textarea' %}
+                                {{ field|add_class:"form-control textarea" }}
+                            {% else %}
+                                {{ field|add_class:"form-control" }}
+                            {% endif %}
+                            {% if field.errors %}
+                                <div class="form-message error">
+                                    {{ field.errors|striptags }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn-form btn-form-primary">Enviar mensaje</button>
+                </form>
             </div>
-        {% endfor %}
-        <button type="submit" class="submit-button">Enviar mensaje</button>
-    </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
